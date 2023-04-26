@@ -39,6 +39,7 @@ export const Home: React.FC = () => {
   }, [passwordLength]);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
+    console.log(event);
     if (typeof newValue === "number") {
       setPasswordLength(newValue);
       setPassword(generatePassword(newValue));
