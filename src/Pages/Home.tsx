@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Slider, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import {
   ArrowsCounterClockwise,
   Brain,
@@ -10,6 +10,16 @@ import * as React from "react";
 import { useMemo, useState } from "react";
 import { generatePassword } from "../utils";
 import { useSnackbar } from "notistack";
+import {
+  LengthSlider,
+  StyledBlurb,
+  StyledCopyButton,
+  StyledHeader,
+  StyledPasswordContent,
+  StyledPasswordSafety,
+  StyledSubContent,
+  StyledWrapper,
+} from "./Home.styles";
 
 export const Home: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -17,23 +27,31 @@ export const Home: React.FC = () => {
   const [password, setPassword] = useState(generatePassword(passwordLength));
 
   const { backgroundColor, shield, passwordSafety } = useMemo(() => {
-    let backgroundColor;
-    let shield;
-    let passwordSafety;
+    const passwordSafetyValues = [
+      {
+        backgroundColor: "rgb(209, 54, 78)",
+        shield: <ShieldSlash size={24} />,
+        passwordSafety: "Weak Password",
+        threshold: 6,
+      },
+      {
+        backgroundColor: "rgb(190, 78, 58)",
+        shield: <ShieldWarning size={24} />,
+        passwordSafety: "Moderately Strong Password",
+        threshold: 8,
+      },
+      {
+        backgroundColor: "#1C815A",
+        shield: <ShieldCheck size={24} />,
+        passwordSafety: "Strong Password",
+        threshold: Infinity,
+      },
+    ];
 
-    if (passwordLength <= 6) {
-      backgroundColor = "rgb(209, 54, 78)";
-      shield = <ShieldSlash size={24} />;
-      passwordSafety = "Weak Password";
-    } else if (passwordLength < 9) {
-      backgroundColor = "rgb(190, 78, 58)";
-      shield = <ShieldWarning size={24} />;
-      passwordSafety = "Moderately Strong Password";
-    } else {
-      backgroundColor = "#1C815A";
-      shield = <ShieldCheck size={24} />;
-      passwordSafety = "Strong Password";
-    }
+    const { backgroundColor, shield, passwordSafety } =
+      passwordSafetyValues.find(
+        ({ threshold }) => passwordLength <= threshold
+      )!;
 
     return { backgroundColor, shield, passwordSafety };
   }, [passwordLength]);
@@ -47,29 +65,19 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <Box
+    <StyledWrapper
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        padding: "2.5rem 5rem 2.5rem 5rem",
         backgroundColor,
-        color: "white",
       }}
     >
-      <Box sx={{ paddingBottom: "5rem", display: "flex", gap: "10px" }}>
+      <StyledHeader>
         <Brain fill={"white"} size={40} />
         <Typography variant="h4">PassGenius</Typography>
-      </Box>
-      <Typography variant="h5" sx={{ fontWeight: 600, paddingBottom: "1rem" }}>
+      </StyledHeader>
+      <StyledBlurb variant="h5">
         Protect yourself. No more Password123.
-      </Typography>
-      <Box
-        sx={{
-          color: "white",
-          borderBottom: "2px solid white",
-          display: "flex",
-        }}
-      >
+      </StyledBlurb>
+      <StyledPasswordContent>
         <Typography sx={{ width: "100%" }} variant="h5">
           {password}
         </Typography>
@@ -78,39 +86,25 @@ export const Home: React.FC = () => {
         >
           <ArrowsCounterClockwise fill={"white"} size={24} />
         </IconButton>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "1rem 0 2rem 0",
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+      </StyledPasswordContent>
+      <StyledSubContent>
+        <StyledPasswordSafety>
           {shield}
           <Typography variant="h6">{passwordSafety}</Typography>
-        </Box>
-        <Button
+        </StyledPasswordSafety>
+        <StyledCopyButton
           onClick={() => {
             navigator.clipboard.writeText(password);
             enqueueSnackbar("Password copied!");
           }}
-          sx={{
-            padding: "10px",
-            backgroundColor: "white",
-            color: "black",
-            "&:focus-visible": { background: "white" },
-            "&:active": { background: "white" },
-            "&:hover": { backgroundColor: "grey" },
-          }}
           variant="contained"
         >
           Copy password
-        </Button>
-      </Box>
+        </StyledCopyButton>
+      </StyledSubContent>
       <Box sx={{ width: "100%" }}>
         <Typography variant="body2">{`Length: ${passwordLength}`}</Typography>
-        <Slider
+        <LengthSlider
           aria-label="Password Length"
           value={passwordLength}
           size="medium"
@@ -118,22 +112,8 @@ export const Home: React.FC = () => {
           min={4}
           max={30}
           onChange={handleChange}
-          sx={{
-            "& .MuiSlider-thumb": {
-              color: "white",
-            },
-            "& .MuiSlider-track": {
-              color: "white",
-            },
-            "& .MuiSlider-rail": {
-              color: "white",
-            },
-            "& .MuiSlider-active": {
-              color: "white",
-            },
-          }}
         />
       </Box>
-    </Box>
+    </StyledWrapper>
   );
 };
