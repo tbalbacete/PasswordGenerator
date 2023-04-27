@@ -20,6 +20,8 @@ import {
   StyledSubContent,
   StyledWrapper,
 } from "./Home.styles";
+import { Footer } from "./Footer";
+import { Content1 } from "./Content";
 
 export const Home: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -37,7 +39,7 @@ export const Home: React.FC = () => {
       {
         backgroundColor: "rgb(190, 78, 58)",
         shield: <ShieldWarning size={24} />,
-        passwordSafety: "Moderately Strong Password",
+        passwordSafety: "Average Password",
         threshold: 8,
       },
       {
@@ -65,55 +67,59 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <StyledWrapper
-      sx={{
-        backgroundColor,
-      }}
-    >
-      <StyledHeader>
-        <Brain fill={"white"} size={40} />
-        <Typography variant="h4">PassGenius</Typography>
-      </StyledHeader>
-      <StyledBlurb variant="h5">
-        Protect yourself. No more Password123.
-      </StyledBlurb>
-      <StyledPasswordContent>
-        <Typography sx={{ width: "100%" }} variant="h5">
-          {password}
-        </Typography>
-        <IconButton
-          onClick={() => setPassword(generatePassword(passwordLength))}
-        >
-          <ArrowsCounterClockwise fill={"white"} size={24} />
-        </IconButton>
-      </StyledPasswordContent>
-      <StyledSubContent>
-        <StyledPasswordSafety>
-          {shield}
-          <Typography variant="h6">{passwordSafety}</Typography>
-        </StyledPasswordSafety>
-        <StyledCopyButton
-          onClick={() => {
-            navigator.clipboard.writeText(password);
-            enqueueSnackbar("Password copied!");
-          }}
-          variant="contained"
-        >
-          Copy password
-        </StyledCopyButton>
-      </StyledSubContent>
-      <Box sx={{ width: "100%" }}>
-        <Typography variant="body2">{`Length: ${passwordLength}`}</Typography>
-        <LengthSlider
-          aria-label="Password Length"
-          value={passwordLength}
-          size="medium"
-          color="secondary"
-          min={4}
-          max={30}
-          onChange={handleChange}
-        />
-      </Box>
-    </StyledWrapper>
+    <>
+      <StyledWrapper
+        sx={{
+          backgroundColor,
+        }}
+      >
+        <StyledHeader>
+          <Brain fill={"white"} size={40} />
+          <Typography variant="h4">PassGenius</Typography>
+        </StyledHeader>
+        <StyledBlurb variant="h5">
+          Protect yourself. No more Password123.
+        </StyledBlurb>
+        <StyledPasswordContent>
+          <Typography sx={{ width: "100%" }} variant="h5">
+            {password}
+          </Typography>
+          <IconButton
+            onClick={() => setPassword(generatePassword(passwordLength))}
+          >
+            <ArrowsCounterClockwise fill={"white"} size={24} />
+          </IconButton>
+        </StyledPasswordContent>
+        <StyledSubContent>
+          <StyledPasswordSafety>
+            {shield}
+            <Typography variant="h6">{passwordSafety}</Typography>
+          </StyledPasswordSafety>
+          <StyledCopyButton
+            onClick={() => {
+              navigator.clipboard.writeText(password);
+              enqueueSnackbar("Password copied!");
+            }}
+            variant="contained"
+          >
+            Copy password
+          </StyledCopyButton>
+        </StyledSubContent>
+        <Box sx={{ width: "100%" }}>
+          <Typography variant="body2">{`Length: ${passwordLength}`}</Typography>
+          <LengthSlider
+            aria-label="Password Length"
+            value={passwordLength}
+            size="medium"
+            color="secondary"
+            min={4}
+            max={30}
+            onChange={handleChange}
+          />
+        </Box>
+      </StyledWrapper>
+      <Content1 />
+      <Footer />
+    </>
   );
 };
