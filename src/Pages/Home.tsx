@@ -20,8 +20,8 @@ import {
   StyledSubContent,
   StyledWrapper,
 } from "./Home.styles";
+import { Content1, Content2 } from "./Content";
 import { Footer } from "./Footer";
-import { Content1 } from "./Content";
 
 export const Home: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -119,6 +119,7 @@ export const Home: React.FC = () => {
         </Box>
       </StyledWrapper>
       <Content1 />
+      <Content2 />
       <Footer />
     </>
   );
