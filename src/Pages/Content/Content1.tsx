@@ -48,14 +48,20 @@ export const Content1 = () => {
         <Button
           href="https://cipher.com/blog/10-personal-cyber-security-tips-cyberaware/"
           target="_blank"
-          sx={{ padding: "10px", backgroundColor: "rgb(9, 54, 63)" }}
+          sx={{
+            padding: "10px",
+            backgroundColor: "rgb(9, 54, 63)",
+            textTransform: "none",
+            letterSpacing: "0.1em",
+            width: "50%",
+          }}
           variant="contained"
         >
           Find More Security Tips Here
         </Button>
       </Box>
       <Card>
-        <CardMedia component="img" src="/secure.jpg" />
+        <CardMedia component="img" src="/phoneHold.jpg" />
       </Card>
     </Box>
   );

@@ -47,9 +47,11 @@ export const StyledCopyButton = styled(Button)({
   padding: "10px",
   backgroundColor: "white",
   color: "black",
+  textTransform: "none",
+  letterSpacing: "0.1em",
   "&:focus-visible": { background: "white" },
   "&:active": { background: "white" },
-  "&:hover": { backgroundColor: "grey" },
+  "&:hover": { backgroundColor: "lightgrey" },
 });
 
 export const LengthSlider = styled(Slider)({
