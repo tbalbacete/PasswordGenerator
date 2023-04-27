@@ -29,6 +29,7 @@ export const Content1 = () => {
           maxWidth: "40%",
           "@media (max-width: 1200px)": {
             maxWidth: "100%",
+            alignItems: "center",
           },
         }}
       >
