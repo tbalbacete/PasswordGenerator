@@ -54,7 +54,7 @@ export const Content1 = () => {
             backgroundColor: "rgb(9, 54, 63)",
             textTransform: "none",
             letterSpacing: "0.1em",
-            width: "50%",
+            width: "60%",
           }}
           variant="contained"
         >

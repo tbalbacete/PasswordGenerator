@@ -98,7 +98,7 @@ export const Home: React.FC = () => {
           <StyledCopyButton
             onClick={() => {
               navigator.clipboard.writeText(password);
-              enqueueSnackbar("Password copied!");
+              enqueueSnackbar("Password copied!", { style: { fontFamily: "Helvetica", color: "rgb(9, 54, 63)", backgroundColor: "#EBE9E7" } });
             }}
             variant="contained"
           >
