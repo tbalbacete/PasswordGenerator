@@ -2,13 +2,9 @@ import { Box, IconButton, Typography } from "@mui/material";
 import {
   ArrowsCounterClockwise,
   Brain,
-  ShieldCheck,
-  ShieldSlash,
-  ShieldWarning,
 } from "@phosphor-icons/react";
 import * as React from "react";
 import { useMemo, useState } from "react";
-import { generatePassword } from "../utils";
 import { useSnackbar } from "notistack";
 import {
   LengthSlider,
@@ -22,6 +18,8 @@ import {
 } from "./Home.styles";
 import { Content1, Content2 } from "./Content";
 import { Footer } from "./Footer";
+import { passwordSafetyValues } from "@/consts";
+import { generatePassword } from "@/utils";
 
 export const Home: React.FC = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -29,26 +27,6 @@ export const Home: React.FC = () => {
   const [password, setPassword] = useState(generatePassword(passwordLength));
 
   const { backgroundColor, shield, passwordSafety } = useMemo(() => {
-    const passwordSafetyValues = [
-      {
-        backgroundColor: "rgb(209, 54, 78)",
-        shield: <ShieldSlash size={24} />,
-        passwordSafety: "Weak Password",
-        threshold: 6,
-      },
-      {
-        backgroundColor: "rgb(190, 78, 58)",
-        shield: <ShieldWarning size={24} />,
-        passwordSafety: "Average Password",
-        threshold: 8,
-      },
-      {
-        backgroundColor: "#1C815A",
-        shield: <ShieldCheck size={24} />,
-        passwordSafety: "Strong Password",
-        threshold: Infinity,
-      },
-    ];
 
     const { backgroundColor, shield, passwordSafety } =
       passwordSafetyValues.find(
