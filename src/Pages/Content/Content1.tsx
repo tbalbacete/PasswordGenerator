@@ -33,7 +33,10 @@ export const Content1 = () => {
           },
         }}
       >
-        <Typography variant="h4" sx={{ color: "rgb(9, 54, 63)" }}>
+        <Typography
+          variant="h4"
+          sx={{ color: "rgb(9, 54, 63)", fontWeight: 600 }}
+        >
           Increase your security by using our password generator tool
         </Typography>
         <Typography variant="h6">
@@ -61,8 +64,8 @@ export const Content1 = () => {
           Find More Security Tips Here
         </Button>
       </Box>
-      <Card>
-        <CardMedia component="img" src="/phoneHold.jpg" />
+      <Card sx={{ border: "none", boxShadow: "none" }}>
+        <CardMedia component="img" src="/socialmedia.png" />
       </Card>
     </Box>
   );
