@@ -1,1 +1,1 @@
-export * from "./passwordSafetyValues"
+export * from "./passwordSafetyValues";
